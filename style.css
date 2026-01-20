@@ -187,12 +187,17 @@ td, th {
 
     /* Stack navigation vertically */
     nav ul {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+        gap: 8px;
     }
 
     nav {
-        padding: 15px;
+        padding: 8px 10px;
+    }
+    nav a {
+        padding: 5px 8px;
+        font-size: 0.9rem;
     }
 
     /* Gallery: 1 column */
