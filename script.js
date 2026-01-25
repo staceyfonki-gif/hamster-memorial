@@ -74,6 +74,26 @@ return;
 form.submit();
 });
 
+function setupCounter(buttonId, countId, storageKey) {
+  const button = document.getElementById(buttonId);
+  const countSpan = document.getElementById(countId);
+
+  let count = localStorage.getItem(storageKey);
+  count = count ? parseInt(count) : 0;
+
+  countSpan.textContent = count;
+
+  button.addEventListener("click", function () {
+    count++;
+    countSpan.textContent = count;
+    localStorage.setItem(storageKey, count);
+  });
+}
+
+setupCounter("heartBtn", "heartCount", "heartCount");
+setupCounter("loveBtn", "loveCount", "loveCount");
+setupCounter("candleBtn", "candleCount", "candleCount");
+
 
 //show or hide sections DOM manipulations
 
