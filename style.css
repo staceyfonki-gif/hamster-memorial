@@ -82,7 +82,7 @@ section {
 }
 #gallery .img-box {
     border-radius: 18px;
-    aspectratio: 1 / 1;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
 }
 #gallery .img-box img {
