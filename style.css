@@ -1,4 +1,4 @@
-body {
+ body {
   font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
     background-color: #fff8f0;
@@ -82,6 +82,7 @@ section {
 }
 #gallery .img-box {
     border-radius: 18px;
+    aspectratio: 1 / 1;
     overflow: hidden;
 }
 #gallery .img-box img {
