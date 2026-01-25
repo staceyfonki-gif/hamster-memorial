@@ -65,23 +65,6 @@ section {
     text-align: center;
     font-size: 0.9rem;
 }
-form {
-    display: block;
-    margin: 0 auto;
-    max-width: 500px;
-    padding: 20px;
-    background-color: #fff3e6;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-input, textarea, select, button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
 #gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -98,7 +81,6 @@ input, textarea, select, button {
     margin: 0;
 }
 #gallery .img-box {
-    aspect-ratio: 1 / 1;
     border-radius: 18px;
     overflow: hidden;
 }
