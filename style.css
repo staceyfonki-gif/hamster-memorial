@@ -58,7 +58,7 @@ input, textarea, select, button {
     grid-template-columns: repeat(3, 1fr);
     padding: 0;
     gap: 8px;
-    margin: 15px;
+    margin: 0;
     width: 100%;
 }
 #gallery figure img:hover {
@@ -215,6 +215,7 @@ td, th {
     /* Gallery: 1 column */
     #gallery {
         grid-template-columns: 1fr;
+        margin: 0 auto;
     }
 
     /* Reduce section margins */
