@@ -28,6 +28,18 @@ section {
     padding: 15px;
     margin: 15px;
 }
+#heartBtn {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ffb6c1;
+  cursor: pointer;
+}
+
+#heartBtn:hover {
+  background-color: #ff8fa3;
+}
 
 #gallery figcaption {
     font-style: italic;
