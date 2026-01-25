@@ -8,9 +8,12 @@ const loveCount = document.getElementById("loveCount");
 const candleCount = document.getElementById("candleCount");
 
 // ---------- JSONBin setup ----------
-const BIN_ID = "6976522943b1c97be9494cf6"; // paste your bin ID
-const API_KEY = "$2a$10$fkCw.4DkTMF97IL9PiySzOjUI5H/6WvgXv4Zsx3siFPJnLb.odTVi"; // paste your secret API key
+const BIN_ID = "6976522943b1c97be9494cf6"; 
+const API_KEY = "$2a$10$fkCw.4DkTMF97IL9PiySzOjUI5H/6WvgXv4Zsx3siFPJnLb.odTVi"; 
 const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+// ---------- Emoji mapping ----------
+const EMOJIS = { heart: "💖", love: "🤍", candle: "🕯" };
 
 // ---------- Helper to format numbers ----------
 function formatNumber(value) {
@@ -59,6 +62,13 @@ async function incrementCounter(type) {
     if (type === "heart") heartCount.textContent = formatNumber(counts.heart);
     if (type === "love") loveCount.textContent = formatNumber(counts.love);
     if (type === "candle") candleCount.textContent = formatNumber(counts.candle);
+
+    // Pop animation
+    const btnMap = { heart: heartBtn, love: loveBtn, candle: candleBtn };
+    const btn = btnMap[type];
+    btn.setAttribute('data-emoji', EMOJIS[type]);
+    btn.classList.add('clicked');
+    setTimeout(() => btn.classList.remove('clicked'), 600);
 
   } catch (err) {
     console.error("Error updating count:", err);
