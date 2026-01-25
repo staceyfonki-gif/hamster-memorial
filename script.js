@@ -85,7 +85,21 @@ messageSection.prepend(toggleButton);
 
 toggleButton.addEventListener("click", function () {
 form.classList.toggle("hidden");
+});const heartBtn = document.getElementById("heartBtn");
+const heartCountSpan = document.getElementById("heartCount");
+
+// get saved count or start at 0
+let heartCount = localStorage.getItem("heartCount");
+heartCount = heartCount ? parseInt(heartCount) : 0;
+
+heartCountSpan.textContent = heartCount;
+
+heartBtn.addEventListener("click", function () {
+  heartCount++;
+  heartCountSpan.textContent = heartCount;
+  localStorage.setItem("heartCount", heartCount);
 });
+
 
 
 // Create DOM elements from JSON
