@@ -28,17 +28,34 @@ section {
     padding: 15px;
     margin: 15px;
 }
-#heartBtn {
-  font-size: 1.2rem;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  background-color: #ffb6c1;
-  cursor: pointer;
+#tribute {
+  text-align: center;
+  background-color: #fff3e6;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px;
 }
 
-#heartBtn:hover {
-  background-color: #ff8fa3;
+.tribute-buttons {
+  margin: 15px 0;
+}
+
+.tribute-buttons button {
+  font-size: 1rem;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #ffd6d6;
+}
+
+.tribute-buttons button:hover {
+  background-color: #ffb6b6;
+}
+
+.tribute-buttons span {
+  margin-left: 10px;
+  font-weight: bold;
 }
 
 #gallery figcaption {
@@ -181,7 +198,8 @@ td, th {
 
     /* Gallery: 2 columns instead of 3 */
     #gallery {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        margin: 0 auto;
     }
 
     /* Navigation spacing tighter */
