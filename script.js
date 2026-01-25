@@ -1,38 +1,49 @@
-// --- Get buttons ---
+// --- Button elements ---
 const heartBtn = document.getElementById("heartBtn");
 const loveBtn = document.getElementById("loveBtn");
 const candleBtn = document.getElementById("candleBtn");
 
-// --- Get counters ---
+// --- Counter display elements ---
 const heartCount = document.getElementById("heartCount");
 const loveCount = document.getElementById("loveCount");
 const candleCount = document.getElementById("candleCount");
 
-// --- Load saved values or start at 0 ---
-let hearts = localStorage.getItem("hearts") || 0;
-let loves = localStorage.getItem("loves") || 0;
-let candles = localStorage.getItem("candles") || 0;
+// --- CountAPI namespace and keys (unique for your site) ---
+const namespace = "nathietribute"; // change if you want something else
+const heartKey = "heart";
+const loveKey = "love";
+const candleKey = "candle";
 
-// --- Display initial values ---
-heartCount.textContent = hearts;
-loveCount.textContent = loves;
-candleCount.textContent = candles;
+// --- Function to get initial value from CountAPI ---
+function loadCount(key, element) {
+  fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      element.textContent = data.value || 0;
+    })
+    .catch(() => {
+      element.textContent = 0; // fallback if API fails
+    });
+}
 
-// --- Event listeners ---
-heartBtn.addEventListener("click", function () {
-  hearts++;
-  heartCount.textContent = hearts;
-  localStorage.setItem("hearts", hearts);
-});
+// --- Load initial counts ---
+loadCount(heartKey, heartCount);
+loadCount(loveKey, loveCount);
+loadCount(candleKey, candleCount);
 
-loveBtn.addEventListener("click", function () {
-  loves++;
-  loveCount.textContent = loves;
-  localStorage.setItem("loves", loves);
-});
+// --- Function to increment count in CountAPI ---
+function incrementCount(key, element) {
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      element.textContent = data.value;
+    })
+    .catch(() => {
+      console.error("Error incrementing count");
+    });
+}
 
-candleBtn.addEventListener("click", function () {
-  candles++;
-  candleCount.textContent = candles;
-  localStorage.setItem("candles", candles);
-});
+// --- Event listeners for buttons ---
+heartBtn.addEventListener("click", () => incrementCount(heartKey, heartCount));
+loveBtn.addEventListener("click", () => incrementCount(loveKey, loveCount));
+candleBtn.addEventListener("click", () => incrementCount(candleKey, candleCount));
