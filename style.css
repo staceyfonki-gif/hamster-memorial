@@ -35,28 +35,53 @@ section {
   border-radius: 15px;
   margin: 20px;
 }
-
+/* ---------- Tribute Buttons ---------- */
 .tribute-buttons {
-  margin: 15px 0;
+    margin: 15px 0;
+    position: relative; /* for pop animation */
 }
 
 .tribute-buttons button {
-  font-size: 1rem;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  background-color: #ffd6d6;
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px; /* pill shape */
+    cursor: pointer;
+    background: linear-gradient(135deg, #ffd6d6, #fff0e6); /* soft gradient */
+    color: #333;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .tribute-buttons button:hover {
-  background-color: #ffb6b6;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, #ffb6b6, #ffe0cc);
 }
 
-.tribute-buttons span {
-  margin-left: 10px;
-  font-weight: bold;
+/* Tiny pop animation for click */
+.tribute-buttons button::after {
+    content: '💖';
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+.tribute-buttons button.clicked::after {
+    opacity: 1;
+    animation: pop 0.6s forwards;
+}
+
+@keyframes pop {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-20px) scale(1.5); opacity: 0.8; }
+    100% { transform: translateY(-40px) scale(1); opacity: 0; }
+}
+
 
 #gallery figcaption {
     font-style: italic;
