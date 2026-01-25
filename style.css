@@ -35,7 +35,6 @@ section {
   border-radius: 15px;
   margin: 20px;
 }
-/* ---------- Tribute Buttons ---------- */
 .tribute-buttons {
     margin: 15px 0;
     position: relative; /* for pop animation */
@@ -62,13 +61,14 @@ section {
 
 /* Tiny pop animation for click */
 .tribute-buttons button::after {
-    content: '💖';
+    content: attr(data-emoji);
     position: absolute;
     font-size: 1.5rem;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
 }
 
 .tribute-buttons button.clicked::after {
@@ -77,11 +77,10 @@ section {
 }
 
 @keyframes pop {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    50% { transform: translateY(-20px) scale(1.5); opacity: 0.8; }
-    100% { transform: translateY(-40px) scale(1); opacity: 0; }
+    0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateX(-50%) translateY(-20px) scale(1.5); opacity: 0.8; }
+    100% { transform: translateX(-50%) translateY(-40px) scale(1); opacity: 0; }
 }
-
 
 #gallery figcaption {
     font-style: italic;
