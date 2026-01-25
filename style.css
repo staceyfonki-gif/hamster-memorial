@@ -197,10 +197,14 @@ td, th {
     }
 
     /* Gallery: 2 columns instead of 3 */
+
     #gallery {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
         margin: 0 auto;
     }
+
+}
 
     /* Navigation spacing tighter */
     nav ul {
@@ -243,10 +247,17 @@ td, th {
     }
 
     /* Gallery: 1 column */
+
     #gallery {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
         margin: 0 auto;
     }
+
+}
+    
+    
+    
 
     /* Reduce section margins */
     section {
