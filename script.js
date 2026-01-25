@@ -1,53 +1,70 @@
-// --- Buttons ---
+// =====================
+// BUTTON ELEMENTS
+// =====================
 const heartBtn = document.getElementById("heartBtn");
 const loveBtn = document.getElementById("loveBtn");
 const candleBtn = document.getElementById("candleBtn");
 
-// --- Display elements ---
+// =====================
+// DISPLAY ELEMENTS
+// =====================
 const heartCount = document.getElementById("heartCount");
 const loveCount = document.getElementById("loveCount");
 const candleCount = document.getElementById("candleCount");
 
-// --- Namespace and keys ---
-const namespace = "hamster_memorial_stacey"; // make sure this is unique
-const keys = { heart: "💖", love: "🤍", candle: "🕯" };
+// =====================
+// NAMESPACE & KEYS
+// =====================
+const namespace = "hamster_memorial_stacey"; // unique, safe string
+const displayEmojis = { heart: "💖", love: "🤍", candle: "🕯" }; // for pop animation
+const apiKeys = { heart: "heart", love: "love", candle: "candle" }; // safe for CountAPI
 
-// --- Format numbers ---
+// =====================
+// FORMAT NUMBERS (1k, 2.1k, 1M)
+// =====================
 function formatNumber(value) {
   if (value >= 1_000_000) return (value / 1_000_000).toFixed(1) + "M";
   if (value >= 1_000) return (value / 1_000).toFixed(1) + "k";
   return value;
 }
 
-// --- Ensure keys exist and return Promise of value ---
-async function ensureKey(key) {
+// =====================
+// ENSURE KEY EXISTS ON COUNTAPI
+// =====================
+async function ensureKeyExists(key) {
   try {
-    let res = await fetch(`https://api.countapi.xyz/get/${namespace}/${key}`);
-    let data = await res.json();
+    const res = await fetch(`https://api.countapi.xyz/get/${namespace}/${apiKeys[key]}`);
+    const data = await res.json();
     if (data.value !== undefined) return data.value;
-  } catch {}
-  
-  // Create key if doesn't exist
-  await fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&value=0`);
+  } catch (err) {
+    console.log(`Key ${key} does not exist, creating...`);
+  }
+
+  // CREATE key with 0 if it doesn’t exist
+  await fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=${apiKeys[key]}&value=0`);
   return 0;
 }
 
-// --- Load initial counts ---
+// =====================
+// LOAD INITIAL COUNTS
+// =====================
 async function loadCounts() {
-  heartCount.textContent = formatNumber(await ensureKey("heart"));
-  loveCount.textContent = formatNumber(await ensureKey("love"));
-  candleCount.textContent = formatNumber(await ensureKey("candle"));
+  heartCount.textContent = formatNumber(await ensureKeyExists("heart"));
+  loveCount.textContent = formatNumber(await ensureKeyExists("love"));
+  candleCount.textContent = formatNumber(await ensureKeyExists("candle"));
 }
 
-// --- Increment count ---
-async function increment(key, element, btn) {
+// =====================
+// INCREMENT COUNTER
+// =====================
+async function incrementCounter(key, element, btn) {
   try {
-    let res = await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
-    let data = await res.json();
+    const res = await fetch(`https://api.countapi.xyz/hit/${namespace}/${apiKeys[key]}`);
+    const data = await res.json();
     element.textContent = formatNumber(data.value);
 
-    // tiny pop animation
-    btn.setAttribute("data-emoji", keys[key]);
+    // Tiny pop animation
+    btn.setAttribute("data-emoji", displayEmojis[key]);
     btn.classList.add("clicked");
     setTimeout(() => btn.classList.remove("clicked"), 600);
   } catch (err) {
@@ -55,10 +72,14 @@ async function increment(key, element, btn) {
   }
 }
 
-// --- Load counts immediately ---
-loadCounts();
+// =====================
+// ADD EVENT LISTENERS
+// =====================
+heartBtn.addEventListener("click", () => incrementCounter("heart", heartCount, heartBtn));
+loveBtn.addEventListener("click", () => incrementCounter("love", loveCount, loveBtn));
+candleBtn.addEventListener("click", () => incrementCounter("candle", candleCount, candleBtn));
 
-// --- Add click events ---
-heartBtn.addEventListener("click", () => increment("heart", heartCount, heartBtn));
-loveBtn.addEventListener("click", () => increment("love", loveCount, loveBtn));
-candleBtn.addEventListener("click", () => increment("candle", candleCount, candleBtn));
+// =====================
+// INITIAL LOAD
+// =====================
+loadCounts();
