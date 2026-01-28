@@ -8,7 +8,7 @@ const loveCount = document.getElementById("loveCount");
 const candleCount = document.getElementById("candleCount");
 
 // ---------- JSONBin setup ----------
-const BIN_ID = "6976522943b1c97be9494cf6"; 
+const BIN_ID = "6979e858ae596e708ffd50a2"; 
 const API_KEY = "$2a$10$fkCw.4DkTMF97IL9PiySzOjUI5H/6WvgXv4Zsx3siFPJnLb.odTVi"; 
 const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
